@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-bitwise */
+/* eslint-disable no-bitwise */ 
 /* eslint-disable no-shadow */
 import React from 'react';
 import {useState} from 'react';
