@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-bitwise */
+/* eslint-disable no-bitwise */ 
 /* eslint-disable no-shadow */
 import React from 'react';
 import {useState} from 'react';
@@ -35,23 +35,34 @@ export default function App() {
 
   function calculator() {
     const splitNumbers = currentNumber.split(' ');
-    const fistNumber = parseFloat(splitNumbers[0]);
-    const lastNumber = parseFloat(splitNumbers[2]);
+    const firstNumber = parseFloat(splitNumbers[0]);
+    const secondNumber = parseFloat(splitNumbers[2]);
     const operator = splitNumbers[1];
 
     // Faz ação referente tecla pressionada
     switch (operator) {
       case '+':
-        setCurrentNumber((fistNumber + lastNumber).toString());
+        setCurrentNumber((firstNumber + secondNumber).toString());
         return;
       case '-':
-        setCurrentNumber((fistNumber - lastNumber).toString());
+        setCurrentNumber((firstNumber - secondNumber).toString());
         return;
       case 'x':
-        setCurrentNumber((fistNumber + lastNumber).toString());
+        setCurrentNumber((firstNumber * secondNumber).toString());
         return;
       case '/':
-        setCurrentNumber((fistNumber - lastNumber).toString());
+        setCurrentNumber((firstNumber / secondNumber).toString());
+        return;
+      case '%':
+        // Calculate the percentage of the first number
+        setCurrentNumber((firstNumber * (secondNumber / 100)).toString());
+        break;
+      case '+/-':
+        if (currentNumber.startsWith('- ')) {
+          setCurrentNumber(currentNumber.substring(2));
+        } else {
+          setCurrentNumber('- ' + currentNumber);
+        }
         return;
     }
   }
@@ -60,16 +71,18 @@ export default function App() {
     console.log(buttonPressed); // Mostra no Console a tecla pressionada
     if (
       (buttonPressed === '+') |
-      (buttonPressed === '-') |
-      (buttonPressed === 'x') |
-      (buttonPressed === '/')
+        (buttonPressed === '-') |
+        (buttonPressed === 'x') |
+        (buttonPressed === '%') | //portcentagen
+        (buttonPressed === '+/-') || //inversão de sinal
+      buttonPressed === '/'
     ) {
       setCurrentNumber(currentNumber + ' ' + buttonPressed + ' ');
       return;
     }
     switch (buttonPressed) {
       case 'DEL':
-        setCurrentNumber(currentNumber.substring(0, currentNumber.length - 2));
+        setCurrentNumber(currentNumber.substring(0, currentNumber.length - 1));
         return;
       case 'LIMPAR': // Limpa todo o conteúdo
         setLastNumber('');
@@ -79,7 +92,16 @@ export default function App() {
         setLastNumber(currentNumber + ' = ');
         calculator();
         return;
+      case '%': //Porcentagem
+        setCurrentNumber((parseFloat(currentNumber) * 0.01).toString());
+        break;
+      //Logica de inversão de sinal
       case '+/-':
+        if (currentNumber.startsWith('-')) {
+          setCurrentNumber(currentNumber.substring(1));
+        } else {
+          setCurrentNumber('-' + currentNumber);
+        }
         return;
     }
 
@@ -96,7 +118,7 @@ export default function App() {
 
       {/* Area onde os botões são exibidos*/}
       <View style={styles.buttons}>
-        {buttons.map((button) =>
+        {buttons.map(button =>
           button === '=' ? ( // Mapeamento do botão =
             <TouchableOpacity
               onPress={() => handleInput(button)}
@@ -107,7 +129,7 @@ export default function App() {
               </Text>
             </TouchableOpacity>
           ) : (
-            // Mapeamento dos outros botões
+            // Mapeamento dos outros botões //add correção na área de texto onde os botões permanacem brancos
             <TouchableOpacity
               onPress={() => handleInput(button)}
               key={button}
@@ -117,7 +139,7 @@ export default function App() {
                   styles.textButton,
                   {color: typeof button === 'number' ? 'black' : '#0093a6'},
                 ]}>
-                {Button}
+                {button}
               </Text>
             </TouchableOpacity>
           ),
