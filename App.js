@@ -149,7 +149,7 @@ export default function App() {
   );
 }
 
-// Estilização com estilos atualizados
+// Estilização com estilos atualizados seguindo o modelo
 const styles = StyleSheet.create({
   container: {
     flex: 1,
