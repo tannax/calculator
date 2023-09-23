@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-bitwise */ 
-/* eslint-disable no-shadow */
+/* eslint-disable no-bitwise */
+
 import React from 'react';
 import {useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
@@ -123,7 +123,7 @@ export default function App() {
             <TouchableOpacity
               onPress={() => handleInput(button)}
               key={button}
-              style={[styles.button, {backgroundColor: '#3dd0e3'}]}>
+              style={[styles.button, {backgroundColor: '#170B3B'}]}>
               <Text style={[styles.textButton, {color: 'white', fontSize: 30}]}>
                 {button}
               </Text>
@@ -137,7 +137,7 @@ export default function App() {
               <Text
                 style={[
                   styles.textButton,
-                  {color: typeof button === 'number' ? 'black' : '#0093a6'},
+                  {color: typeof button === 'number' ? 'white' : '#7c7c7c'},
                 ]}>
                 {button}
               </Text>
@@ -149,7 +149,7 @@ export default function App() {
   );
 }
 
-// Estilização
+// Estilização com estilos atualizados
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -157,10 +157,10 @@ const styles = StyleSheet.create({
   results: {
     flex: 2,
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#323B36',
   },
   resultText: {
-    color: '#282F38',
+    color: '#fff',
     fontSize: 32,
     fontWeight: 'bold',
     padding: 12,
@@ -173,16 +173,17 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   buttons: {
+    backgroundColor: '#603F8B',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    height: 600,
   },
   button: {
-    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 90,
-    minHeight: 90,
-    flex: 2,
+    minHeight: 120,
+    flex: 1,
   },
   textButton: {
     color: '#7c7c7c',
