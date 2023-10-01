@@ -56,29 +56,15 @@ export default function App() {
       case '%':
         // Calculate the percentage of the first number
         setCurrentNumber((firstNumber * (secondNumber / 100)).toString());
-        break;
-      case '+/-':
-        if (currentNumber.startsWith('- ')) {
-          setCurrentNumber(currentNumber.substring(2));
-        } else {
-          setCurrentNumber('- ' + currentNumber);
-        }
         return;
     }
   }
 
   function handleInput(buttonPressed) {
     console.log(buttonPressed); // Mostra no Console a tecla pressionada
-    if (
-      (buttonPressed === '+') |
-        (buttonPressed === '-') |
-        (buttonPressed === 'x') |
-        (buttonPressed === '%') | //portcentagen
-        (buttonPressed === '+/-') || //inversão de sinal
-      buttonPressed === '/'
-    ) {
-      setCurrentNumber(currentNumber + ' ' + buttonPressed + ' ');
-      return;
+    if(buttonPressed === '+' | buttonPressed === "-" | buttonPressed === "x" | buttonPressed === "/" | buttonPressed ==='%' ){
+      setCurrentNumber(currentNumber + " " + buttonPressed + " ")
+      return
     }
     switch (buttonPressed) {
       case 'DEL':
@@ -97,12 +83,8 @@ export default function App() {
         break;
       //Logica de inversão de sinal
       case '+/-':
-        if (currentNumber.startsWith('-')) {
-          setCurrentNumber(currentNumber.substring(1));
-        } else {
-          setCurrentNumber('-' + currentNumber);
-        }
-        return;
+        setCurrentNumber(currentNumber * -1)
+        return
     }
 
     setCurrentNumber(currentNumber + buttonPressed);
@@ -149,7 +131,7 @@ export default function App() {
   );
 }
 
-// Estilização com estilos atualizados seguindo o modelo
+// Estilização com estilos atualizados
 const styles = StyleSheet.create({
   container: {
     flex: 1,
